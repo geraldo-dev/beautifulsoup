@@ -9,11 +9,12 @@ options.add_argument('--headless')
 drive = webdriver.ChromiumEdge(options=options)
 
 drive.get('https://github.com/geraldo-dev')
+sleep(2)
 page = bs(drive.page_source, 'html.parser')
 
-sleep(2)
 
-title_page = page.title.text
-d = page.find("h1").find_all('span')[-1].text
+name = page.find("span", class_='p-name vcard-fullname d-block overflow-hidden')
+nick_name = page.find("span", class_="p-nickname vcard-username d-block")
+description = page.find("div", class_="p-note user-profile-bio mb-3 js-user-profile-bio f4")
 
-print(type(d),d)
+print('-->', nick_name.get_text())
